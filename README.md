@@ -1,10 +1,12 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pink Chatroom</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+
         body {
             background-color: pink;
             font-family: 'Courier New', Courier, monospace;
@@ -13,11 +15,18 @@
             padding: 0;
             overflow-y: auto;
         }
+        h1 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 3rem;
+            text-align: center;
+            color: white;
+            margin: 20px 0;
+        }
         #chat-container {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            height: 100vh;
+            height: calc(100vh - 100px);
             width: 100%;
             padding: 20px;
             box-sizing: border-box;
@@ -70,6 +79,7 @@
     </style>
 </head>
 <body>
+    <h1>Pink Chatroom</h1>
     <div id="chat-container">
         <div id="messages"></div>
         <div id="input-area">
