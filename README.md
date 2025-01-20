@@ -117,13 +117,14 @@
             }
         }
 
-        // Load messages from local storage
+        // Load messages from local storage, but ensure they are not duplicated
         const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-        savedMessages.forEach(msg => addMessage(msg.user, msg.text));
+        if (messagesDiv.childElementCount === 0) {
+            savedMessages.forEach(msg => addMessage(msg.user, msg.text));
+        }
 
         // Focus on input field on load
         messageInput.focus();
     </script>
 </body>
 </html>
-
