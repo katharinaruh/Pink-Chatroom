@@ -105,6 +105,11 @@
                 addMessage(username, message);
                 messageInput.value = '';
                 messageInput.focus();
+
+                // Save messages to local storage when the user sends a new message
+                const currentMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+                currentMessages.push({ user: username, text: message });
+                localStorage.setItem('chatMessages', JSON.stringify(currentMessages));
             }
         }
 
@@ -113,11 +118,6 @@
             messageElement.innerHTML = `<strong>${user}:</strong> ${text}`;
             messagesDiv.appendChild(messageElement);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-            // Save messages to local storage
-            const currentMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-            currentMessages.push({ user, text });
-            localStorage.setItem('chatMessages', JSON.stringify(currentMessages));
         }
 
         function openGifPicker() {
@@ -127,7 +127,7 @@
             }
         }
 
-        // Load messages from local storage only if not already loaded
+        // Load messages from local storage only (but do not save them again)
         const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
         savedMessages.forEach(msg => addMessage(msg.user, msg.text));
 
