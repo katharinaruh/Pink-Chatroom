@@ -30,6 +30,7 @@
             border-radius: 10px;
             padding: 10px;
             margin-bottom: 20px;
+            font-family: 'Courier New', Courier, monospace;
         }
         #messages div {
             margin: 5px 0;
@@ -44,6 +45,7 @@
             font-size: 1rem;
             border-radius: 5px;
             border: none;
+            font-family: 'Courier New', Courier, monospace;
         }
         #input-area button {
             padding: 10px;
@@ -53,6 +55,7 @@
             cursor: pointer;
             background-color: white;
             color: black;
+            font-family: 'Courier New', Courier, monospace;
         }
     </style>
 </head>
@@ -60,7 +63,7 @@
     <div id="chat-container">
         <div id="messages"></div>
         <div id="input-area">
-            <input type="text" id="message-input" placeholder="Schreib etwas...">
+            <input type="text" id="message-input" placeholder="Schreib etwas..." autofocus>
             <button onclick="sendMessage()">Senden</button>
         </div>
     </div>
@@ -80,6 +83,7 @@
             if (message) {
                 addMessage(username, message);
                 messageInput.value = '';
+                messageInput.focus();
             }
         }
 
@@ -98,6 +102,9 @@
         // Load messages from local storage
         const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
         savedMessages.forEach(msg => addMessage(msg.user, msg.text));
+
+        // Focus on input field on load
+        messageInput.focus();
     </script>
 </body>
 </html>
