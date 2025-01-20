@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -127,14 +127,19 @@
             }
         }
 
-        // Load messages from local storage, but ensure they are not duplicated
+        // Load messages from local storage only if not already loaded
         const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-        if (messagesDiv.childElementCount === 0) {
-            savedMessages.forEach(msg => addMessage(msg.user, msg.text));
-        }
+        savedMessages.forEach(msg => addMessage(msg.user, msg.text));
 
         // Focus on input field on load
         messageInput.focus();
+
+        // Add event listener for Enter key to send message
+        messageInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
     </script>
 </body>
 </html>
