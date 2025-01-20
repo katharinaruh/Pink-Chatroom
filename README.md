@@ -9,10 +9,9 @@
             background-color: pink;
             font-family: 'Courier New', Courier, monospace;
             color: black;
-            text-align: center;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow-y: auto;
         }
         #chat-container {
             display: flex;
@@ -31,6 +30,7 @@
             padding: 10px;
             margin-bottom: 20px;
             font-family: 'Courier New', Courier, monospace;
+            text-align: left;
         }
         #messages div {
             margin: 5px 0;
@@ -57,6 +57,16 @@
             color: black;
             font-family: 'Courier New', Courier, monospace;
         }
+        #gif-picker {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            font-family: 'Courier New', Courier, monospace;
+        }
     </style>
 </head>
 <body>
@@ -65,6 +75,7 @@
         <div id="input-area">
             <input type="text" id="message-input" placeholder="Schreib etwas..." autofocus>
             <button onclick="sendMessage()">Senden</button>
+            <button id="gif-picker" onclick="openGifPicker()">GIF</button>
         </div>
     </div>
 
@@ -99,6 +110,13 @@
             localStorage.setItem('chatMessages', JSON.stringify(currentMessages));
         }
 
+        function openGifPicker() {
+            const gifUrl = prompt('Füge eine URL für dein GIF ein:');
+            if (gifUrl) {
+                addMessage(username, `<img src="${gifUrl}" alt="GIF" style="max-width: 100%; height: auto;">`);
+            }
+        }
+
         // Load messages from local storage
         const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
         savedMessages.forEach(msg => addMessage(msg.user, msg.text));
@@ -108,3 +126,4 @@
     </script>
 </body>
 </html>
+
